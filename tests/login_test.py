@@ -9,12 +9,10 @@ class TestLogin:
 
     @pytest.fixture(autouse=True)
     def setup_login_test(self):
-        common_page = CommonPage(self.page)
-        common_page.click_sign_in()
+        self.common_page = CommonPage(self.page)
+        self.common_page.click_sign_in()
+        self.login_page = LoginPage(self.page)
 
     def test_01(self, page: Page):
-        login_page = LoginPage(self.page)
-        login_page.login_user("customer@practicesoftwaretesting.com", "welcome01")
+        self.login_page.login_user("customer@practicesoftwaretesting.com", "welcome01")
         expect(self.page).to_have_url("https://practicesoftwaretesting.com/#/account")
-
-
