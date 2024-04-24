@@ -1,4 +1,4 @@
-name: Python CI with pytest and Allure
+name: Python CI with pytest and Allure with playwright
 
 on:
   push:
