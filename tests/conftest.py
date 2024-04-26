@@ -15,7 +15,7 @@ def setup(request, playwright):
     if "api" not in request.node.keywords:
         global page
         global browser
-        browser = playwright.chromium.launch(headless=False)
+        browser = playwright.chromium.launch(headless=True)
         # context = browser.new_context(viewport=None, is_mobile=False)
         page = browser.new_page()
         # Set the viewport size to simulate maximizing the browser window
