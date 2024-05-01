@@ -14,6 +14,6 @@ class TestLogin:
         self.login_page = LoginPage(self.page)
 
     @pytest.mark.devRun
-    def test_01(self, page: Page):
+    def test_login_with_valid_cred(self, page: Page):
         self.login_page.login_user("customer@practicesoftwaretesting.com", "welcome01")
         expect(self.page).to_have_url("https://practicesoftwaretesting.com/#/account")

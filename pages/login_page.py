@@ -1,3 +1,4 @@
+import allure
 from playwright.sync_api import Page
 
 
@@ -11,6 +12,7 @@ class LoginPage:
         self.forgot_password_button = page.locator(".ForgetPwd")
         self.login_error = page.locator(".help-block")
 
+    @allure.step("user login with cred - username: {username}, password: {password}")
     def login_user(self, username: str, password: str):
         self.email_field.fill(username)
         self.password_field.fill(password)
