@@ -10,10 +10,12 @@ class LoginPage:
         self.login_button = page.locator("input[value='Login']")
         self.register_button = page.locator("a[data-test='register-link']")
         self.forgot_password_button = page.locator(".ForgetPwd")
-        self.login_error = page.locator(".help-block")
+        self.login_error = page.locator("data-test=login-error")
+        self.password_error = page.locator("data-test=password-error")
+        self.email_error = page.locator("data-test=email-error")
 
-    @allure.step("user login with cred - username: {username}, password: {password}")
-    def login_user(self, username: str, password: str):
-        self.email_field.fill(username)
+    @allure.step("user login with cred - email: {email}, password: {password}")
+    def login_user(self, email: str, password: str):
+        self.email_field.fill(email)
         self.password_field.fill(password)
         self.login_button.click()

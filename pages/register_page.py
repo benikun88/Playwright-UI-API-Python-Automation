@@ -1,3 +1,4 @@
+import allure
 from playwright.sync_api import Page
 
 
@@ -19,6 +20,9 @@ class RegisterPage:
         # error msg's
         self.register_button = page.locator('data-test=postcode-error')
 
+    @allure.step( "register user with first name: {first_name}, last name: {last_name}, date of birth: {"
+                  "date_of_birth}, password: {password}, address: {address_field}, postcode: {post_code_field}, "
+                  "state: {state}, country: {country}, city: {city_field}, phone: {phone}, email: {email}")
     def register(self, first_name: str, last_name: str, date_of_birth: str, password: str, address_field: str,
                  post_code_field: str
                  , state: str, country: str, city_field: str, phone: str, email: str):
