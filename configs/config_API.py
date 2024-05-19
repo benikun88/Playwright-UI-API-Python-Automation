@@ -9,12 +9,12 @@ access_token = "55yrut70u8qgvkvaw7xc9yvokhs09ztw"
 access_token_secret = "64ueg9agxzzy4pgsxd73qqnj7f36lkom"
 
 # Base URL
-base_url = "https://magento.softwaretestingboard.com/rest/default/V1"
+base_url = "https://api.practicesoftwaretesting.com"
 
 # Common headers
 common_headers = {
     "Content-Type": "application/json",
-    "Host": "magento.softwaretestingboard.com",
+    "Host": "api.practicesoftwaretesting.com",
     # "Content-Length": "69",
     # "Cookie": "PHPSESSID=827611b7d87be75f321673ab0c102a07",
     "User-Agent": "Chrome/111.0.5575.46"
@@ -47,4 +47,13 @@ customer_payload = {
         }]
     },
     "password": "Password1"
+}
+
+login_payload = {
+    "email": "admin@practicesoftwaretesting.com",
+    "password": "welcome01"
+}
+login_payload_negative = {
+    "email": "admin@practicesoftwaretesting.com",
+    "password": "welcome011"
 }

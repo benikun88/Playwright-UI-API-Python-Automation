@@ -10,7 +10,8 @@ class LoginPage:
         self.login_button = page.locator("input[value='Login']")
         self.register_button = page.locator("a[data-test='register-link']")
         self.forgot_password_button = page.locator(".ForgetPwd")
-        self.login_error = page.locator("data-test=login-error")
+        # self.login_error = page.locator("data-test=login-error")
+        self.login_error = page.get_by_test_id("login-error")
         self.password_error = page.locator("data-test=password-error")
         self.email_error = page.locator("data-test=email-error")
 

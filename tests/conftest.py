@@ -15,13 +15,14 @@ def setup(request, playwright):
     if "api" not in request.node.keywords:
         global page
         global browser
-        browser = playwright.chromium.launch(headless=True)
+        browser = playwright.chromium.launch(headless=False)
         # context = browser.new_context(viewport=None, is_mobile=False)
         page = browser.new_page()
         # Set the viewport size to simulate maximizing the browser window
         # page.set_viewport_size({"width": 1920, "height": 1080})
         page.goto("https://practicesoftwaretesting.com")
         request.cls.page = page  # Provide the page object to the test class
+        playwright.selectors.set_test_id_attribute("data-test")
         yield
         browser.close()
     else:
