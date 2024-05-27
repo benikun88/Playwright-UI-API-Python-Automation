@@ -1,6 +1,8 @@
 # config_API.py
-
 import uuid
+from utilities.helper import HelperCommon
+helper = HelperCommon()
+random_email = helper.generate_random_email()
 
 # Credentials
 consumer_key = "u5gkmvsnxvc5w6qxoy2iwx98mkc1j30d"
@@ -57,3 +59,35 @@ login_payload_negative = {
     "email": "admin@practicesoftwaretesting.com",
     "password": "welcome011"
 }
+register_payload_wrong_password_rules = {
+  "first_name": "John",
+  "last_name": "Doe",
+  "address": "Street 1",
+  "city": "City",
+  "state": "State",
+  "country": "Country",
+  "postcode": "1234AA",
+  "phone": "0987654321",
+  "dob": "1970-01-01",
+  "password": "s",
+  "email": "john1@doe.example"
+}
+register_payload = {
+  "first_name": "benjamin",
+  "last_name": "Kun",
+  "address": "Street 1",
+  "city": "City",
+  "state": "State",
+  "country": "Country",
+  "postcode": "1234AA",
+  "phone": "0987654321",
+  "dob": "1970-01-01",
+  "password": "Orvagas1992!",
+  "email":random_email
+}
+register_password_roles_error=[
+            "The password field must be at least 8 characters.",
+            "The password field must contain at least one uppercase and one lowercase letter.",
+            "The password field must contain at least one symbol.",
+            "The password field must contain at least one number."
+        ]

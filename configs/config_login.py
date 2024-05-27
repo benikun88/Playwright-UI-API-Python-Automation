@@ -1,8 +1,8 @@
 # Test data
-VALID_USERNAME = "benikun88@gmail.com"
-VALID_PASSWORD = "1q2w3e4r!"
+VALID_USERNAME = "customer@practicesoftwaretesting.com"
+VALID_PASSWORD = "welcome01"
 
-INVALID_USERNAME = "benikun88"
+INVALID_USERNAME = "customer@practicesoftwaretesting.co"
 EMPTY_PASSWORD = ""
 
 # Expected error messages
@@ -21,3 +21,9 @@ LOGIN_PAGE_URL = "https://example.com/login"
 
 # Other configurations
 WAIT_TIME = 10  # Adjust this according to your needs
+TEST_DATA=[
+        ("customer@practicesoftwaretesting.com", "welcome01", None),  # Valid credentials
+        ("customer@practicesoftwaretesting.co", "welcome01", "Invalid email or password"),  # Wrong email
+        ("customer@practicesoftwaretesting.com", "", "Password is required."),  # Empty password
+        ("", "welcome01", "E-mail is required.")  # Empty email
+    ]

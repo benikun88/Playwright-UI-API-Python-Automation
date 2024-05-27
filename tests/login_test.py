@@ -2,6 +2,8 @@ import allure
 import pytest
 import time  # Don't forget to import the time module!
 from playwright.sync_api import Page, expect
+
+from configs.config_login import TEST_DATA
 from pages.common_page import CommonPage
 from pages.login_page import LoginPage
 
@@ -17,12 +19,7 @@ class TestLogin:
         self.login_page = LoginPage(self.page)
 
     @pytest.mark.devRun
-    @pytest.mark.parametrize("email, password, expected_error", [
-        ("customer@practicesoftwaretesting.com", "welcome01", None),  # Valid credentials
-        ("customer@practicesoftwaretesting.co", "welcome01", "Invalid email or password"),  # Wrong email
-        ("customer@practicesoftwaretesting.com", "", "Password is required."),  # Empty password
-        ("", "welcome01", "E-mail is required.")  # Empty email
-    ])
+    @pytest.mark.parametrize("email, password, expected_error", TEST_DATA)
     def test_login_with_cred(self, page: Page, email, password, expected_error):
         self.login_page.login_user(email, password)
         if expected_error:
