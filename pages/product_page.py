@@ -10,5 +10,6 @@ class ProductPage:
         self.decrease_quantity_button = page.locator('data-test=decrease-quantity')
         self.product_name = page.locator('data-test=product-name')
 
+    @allure.step("click add to cart")
     def add_to_cart(self):
         self.add_to_cart_button.click()
