@@ -1,43 +1,52 @@
+
 import os
-from urllib import request
-import playwright
 import pytest
-from _pytest.config import Config
-from selenium.webdriver.chrome.options import Options
 import allure
-from selenium import webdriver
-from applitools.selenium import Eyes
-from applitools.common import MatchLevel
+from applitools.images import Eyes
+from playwright.sync_api import sync_playwright
+from _pytest.config import Config
+
+
+@pytest.fixture(scope="session")
+def playwright():
+    with sync_playwright() as playwright:
+        yield playwright
+
+
+@pytest.fixture()
+def browser(playwright):
+    browser = playwright.chromium.launch(headless=True)
+    playwright.selectors.set_test_id_attribute("data-test")
+    yield browser
+    browser.close()
+
+
+@pytest.fixture()
+def page(browser):
+    page = browser.new_page()
+    page.goto("https://practicesoftwaretesting.com")
+    yield page
+    page.close()
 
 
 @pytest.fixture(autouse=True)
-def setup(request, playwright):
+def setup(request, playwright, page):
     if "api" not in request.node.keywords:
-        global page
-        global browser
-        browser = playwright.chromium.launch(headless=False)
-        # context = browser.new_context(viewport=None, is_mobile=False)
-        page = browser.new_page()
-        # Set the viewport size to simulate maximizing the browser window
-        # page.set_viewport_size({"width": 1920, "height": 1080})
-        page.goto("https://practicesoftwaretesting.com")
-        request.cls.page = page  # Provide the page object to the test class
-        playwright.selectors.set_test_id_attribute("data-test")
-        yield
-        browser.close()
+        yield None
     else:
         yield None
 
 
-def pytest_exception_interact(report):
+def pytest_exception_interact(node, call, report):
     if report.failed:
         if "api" not in report.keywords:
+            page = node.instance.page
             screenshot = page.screenshot()
             allure.attach(screenshot, name="screenshot", attachment_type=allure.attachment_type.PNG)
 
 
 def pytest_configure(config: Config) -> None:
-    config.option.allure_report_dir = "allure-results"
+    config.option.allure_report_dir = "ui/allure-results"
 
 
 @pytest.fixture()
@@ -45,14 +54,4 @@ def eyes():
     eyes = Eyes()
     eyes.api_key = 'yQZoWxzsvOfSFbrd3YGmcSpl1061UWFGuNz6dXPWMQvXA110'  # Set your Applitools API key here
     yield eyes
-    eyes.abort_async()  # Make sure to abort the session to handle any exceptions
-
-# def pytest_sessionfinish() -> None:
-#     environment_properties = {
-#      'browser': driver.name,
-#      'driver_version': driver.capabilities['browserVersion']
-#     }
-#     allure_env_path = os.path.join("allure-results", 'environment.properties')
-#     with open(allure_env_path, 'w') as f:
-#         data = '\n'.join([f'{variable}={value}' for variable, value in environment_properties.items()])
-#         f.write(data)
+    eyes.abort_async()

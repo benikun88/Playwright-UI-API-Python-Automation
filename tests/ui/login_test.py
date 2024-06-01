@@ -13,10 +13,11 @@ class TestLogin:
 
     @pytest.fixture(autouse=True)
     @allure.description("setup login test")
-    def setup_login_test(self):
-        self.common_page = CommonPage(self.page)
+    def setup_login_test(self, page: Page):
+        self.page = page
+        self.common_page = CommonPage(page)
         self.common_page.click_sign_in()
-        self.login_page = LoginPage(self.page)
+        self.login_page = LoginPage(page)
 
     @pytest.mark.devRun
     @pytest.mark.parametrize("email, password, expected_error", TEST_DATA)
@@ -33,4 +34,4 @@ class TestLogin:
                 # Handle any other specific error cases here
                 pass
         else:
-            expect(self.page).to_have_url("https://practicesoftwaretesting.com/#/account")
+            expect(page).to_have_url("https://practicesoftwaretesting.com/#/account")

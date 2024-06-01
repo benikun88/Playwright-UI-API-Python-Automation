@@ -5,6 +5,9 @@ class HelperCommon:
     def __init__(self):
         self.fake = Faker()
 
+    def navigate_to(self, url):
+        self.page.goto(url)
+
     def generate_random_email(self):
         """Generate a random email address using faker."""
         return self.fake.email()

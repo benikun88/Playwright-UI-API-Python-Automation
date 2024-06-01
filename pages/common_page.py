@@ -1,3 +1,4 @@
+import allure
 from playwright.sync_api import Page
 
 from pages.cart_page import CartPage
@@ -13,10 +14,12 @@ class CommonPage:
         self.proceed_to_checkout_button = page.locator("aw-wizard-step[steptitle='Cart'] button[type='button']")
         self.add_to_cart_successes_toast = page.locator(".toast-top-right.toast-container")
 
+    # @screenshot_step
+    @allure.step("click sign in")
     def click_sign_in(self):
         self.sign_in_button.click()
 
+    @allure.step("click cart button")
     def click_cart_button(self):
         self.mini_cart_button.click()
         return CartPage(self.page)
-
