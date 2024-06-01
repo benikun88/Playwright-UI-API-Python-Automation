@@ -46,7 +46,7 @@ def pytest_exception_interact(node, call, report):
 
 
 def pytest_configure(config: Config) -> None:
-    config.option.allure_report_dir = "ui/allure-results"
+    config.option.allure_report_dir = "allure-results"
 
 
 @pytest.fixture()
