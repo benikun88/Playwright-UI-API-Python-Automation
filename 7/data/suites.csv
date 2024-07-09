@@ -1,0 +1,5 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Tue Jul 09 05:57:26 GMT 2024","Tue Jul 09 05:57:27 GMT 2024","1028","tests.ui","login_test","TestLogin","","","test_login_with_cred[customer@practicesoftwaretesting.co-welcome01-Invalid email or password]","test login"
+"failed","Tue Jul 09 05:57:20 GMT 2024","Tue Jul 09 05:57:25 GMT 2024","5168","tests.ui","login_test","TestLogin","","","test_login_with_cred[customer@practicesoftwaretesting.com-welcome01-None]","test login"
+"passed","Tue Jul 09 05:57:28 GMT 2024","Tue Jul 09 05:57:28 GMT 2024","165","tests.ui","login_test","TestLogin","","","test_login_with_cred[customer@practicesoftwaretesting.com--Password is required.]","test login"
+"passed","Tue Jul 09 05:57:29 GMT 2024","Tue Jul 09 05:57:29 GMT 2024","164","tests.ui","login_test","TestLogin","","","test_login_with_cred[-welcome01-E-mail is required.]","test login"
