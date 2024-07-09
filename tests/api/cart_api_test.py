@@ -13,6 +13,7 @@ from answers.api_calls import ApiRequests
 @allure.story("Login API test")
 @pytest.mark.api
 class TestCartApi:
+    @allure.description("Test create cart")
     def test_create_cart(self):
         url = f"{base_url}/carts"
         response = ApiRequests.post(url, json=None, headers=common_headers)

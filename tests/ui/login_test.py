@@ -20,6 +20,7 @@ class TestLogin:
         self.login_page = LoginPage(page)
 
     @pytest.mark.devRun
+    @allure.description("test login")
     @pytest.mark.parametrize("email, password, expected_error", TEST_DATA)
     def test_login_with_cred(self, page: Page, email, password, expected_error):
         self.login_page.login_user(email, password)

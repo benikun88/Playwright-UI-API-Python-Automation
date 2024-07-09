@@ -21,7 +21,7 @@ class TestApi:
         print(response.json()["access_token"])
         return response.json()["access_token"]
 
-    @allure.description("Test login with existing user")
+    @allure.description("Test API login with existing user")
     def test_login(self):
         url = f"{base_url}/users/login"
         response = ApiRequests.post(url, json=login_payload, headers=common_headers)
@@ -30,14 +30,14 @@ class TestApi:
         print(response.json()["access_token"])
         assert access_token_id is not None, "Customer ID not received"
 
-    @allure.description("Test login with existing user")
+    @allure.description("Test API login with existing user")
     def test_login_wrong_cred(self):
         url = f"{base_url}/users/login"
         response = ApiRequests.post(url, json=login_payload_negative, headers=common_headers)
         print(response.json())
         assert response.status_code == HTTPStatus.UNAUTHORIZED, f"Failed to create customer: {response.text}"
 
-    @allure.description("Test logout with existing user")
+    @allure.description("Test API logout with existing user")
     def test_logout(self, customer_token):
         url = f"{base_url}/users/logout"
         headers = {
@@ -51,7 +51,7 @@ class TestApi:
         assert response.status_code == HTTPStatus.OK, f"Failed to create customer: {response.text}"
         assert message["message"] == "Successfully logged out", "Unauthorized"
 
-    @allure.description("Test register with wrong data")
+    @allure.description("Test API register with wrong data")
     def test_wrong_password_rules_register(self):
         url = f"{base_url}/users/register"
         response = ApiRequests.post(url, json=register_payload_wrong_password_rules, headers=common_headers)
@@ -59,7 +59,7 @@ class TestApi:
         assert response.status_code == HTTPStatus.UNPROCESSABLE_ENTITY, f"Failed to create customer: {response.text}"
         assert response.json()["password"] == register_password_roles_error, f"Failed to create customer: {response.text}"
 
-    @allure.description("Test register with correct data")
+    @allure.description("Test API register with correct data")
     def test_new_user_register(self):
         url = f"{base_url}/users/register"
         response = ApiRequests.post(url, json=register_payload, headers=common_headers)
